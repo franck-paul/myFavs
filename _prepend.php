@@ -46,7 +46,7 @@ function myFavsDashboardFavs($core,$favs)
 							'plugin.php?p='.$mf_id,
 							'index.php?pf=myFavs/icon.png',
 							'index.php?pf=myFavs/icon-big.png',
-							null,
+							$core->plugins->moduleInfo($mf_id,'permissions'),
 							null,
 							null));
 					}
