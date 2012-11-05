@@ -12,10 +12,10 @@
 if (!defined('DC_RC_PATH')) { return; }
 
 $this->registerModule(
-	/* Name */			"myFavs",
-	/* Description*/		"Add favorite capabilities to all plugins",
+	/* Name */				__("myFavs"),
+	/* Description*/		__("Add favorite capabilities to all plugins"),
 	/* Author */			"Franck Paul",
-	/* Version */			'0.2',
+	/* Version */			'0.1',
 	array(
 		'priority' =>	999999999
 	)
