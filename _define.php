@@ -15,7 +15,7 @@ $this->registerModule(
 	/* Name */			"myFavs",
 	/* Description*/		"Add favorite capabilities to all plugins",
 	/* Author */			"Franck Paul",
-	/* Version */			'0.1',
+	/* Version */			'0.2',
 	array(
 		'priority' =>	999999999
 	)
