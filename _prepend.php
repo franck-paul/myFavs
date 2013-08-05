@@ -16,7 +16,7 @@ if (!defined('DC_CONTEXT_ADMIN')) { return; }
 
 // Admin mode only
 
-$core->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
+$GLOBALS['core']->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
 
 function myFavsDashboardFavs($core,$favs)
 {
