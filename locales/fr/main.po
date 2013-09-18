@@ -16,4 +16,4 @@ msgid "myFavs"
 msgstr "Mes favoris"
 
 msgid "Add favorite capabilities to all plugins"
-msgstr "Ajoute la possibilité de mise en favori à toutes les extensions"
+msgstr "Ajoute la possibilité de mise en favori à toutes les plugins"

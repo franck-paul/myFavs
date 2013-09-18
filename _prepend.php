@@ -30,7 +30,7 @@ function myFavsDashboardFavs($core,$favs)
 				// Looks for index.php, mandatory to create a fav on dashboard
 				if (file_exists($mf_root.'/index.php')) {
 					$mf_found = false;
-					// Looks for _admin.php, mandatory to register fav's behaviours (may be but should not be in _prepend.php!)
+					// Looks for _admin.php, mandatory to register fav's behaviours (may be, but should not be, in _prepend.php!)
 					if (file_exists($mf_root.'/_admin.php')) {
 						// Looks for 'adminDashboardFavs' string in PHP code of _admin.php
 						$mf_content = file_get_contents($mf_root.'/_admin.php');
@@ -53,6 +53,6 @@ function myFavsDashboardFavs($core,$favs)
 				}
 			}
 		}
-	}	
+	}
 }
 ?>
