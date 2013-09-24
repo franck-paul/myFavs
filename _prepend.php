@@ -16,6 +16,9 @@ if (!defined('DC_RC_PATH')) { return; }
 
 if (!defined('DC_CONTEXT_ADMIN')) { return; }
 
+// dead but useful code, in order to have translations
+__('myFavs').__('Add favorite capabilities to all plugins');
+
 // Admin mode only
 
 $GLOBALS['core']->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
