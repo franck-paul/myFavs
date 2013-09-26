@@ -21,7 +21,7 @@ __('myFavs').__('Add favorite capabilities to all plugins');
 
 // Admin mode only
 
-$GLOBALS['core']->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
+$core->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
 
 function myFavsDashboardFavs($core,$favs)
 {
@@ -60,4 +60,3 @@ function myFavsDashboardFavs($core,$favs)
 		}
 	}
 }
-?>
