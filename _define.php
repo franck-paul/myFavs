@@ -18,6 +18,7 @@ $this->registerModule(
 	/* Author */			"Franck Paul",
 	/* Version */			'0.3',
 	array(
-		'priority' =>	999999999
+		/* Type */			'type' =>			'plugin',
+		/* Priority */		'priority' => 		999999999
 	)
 );
