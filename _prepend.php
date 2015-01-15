@@ -14,7 +14,7 @@ if (!defined('DC_RC_PATH')) { return; }
 
 // Public and Admin mode
 
-if (!defined('DC_CONTEXT_ADMIN')) { return; }
+if (!defined('DC_CONTEXT_ADMIN')) { return false; }
 
 // dead but useful code, in order to have translations
 __('myFavs').__('Add favorite capabilities to all plugins');
