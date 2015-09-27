@@ -1,24 +1,32 @@
 <?php
-# -- BEGIN LICENSE BLOCK ---------------------------------------
+# -- BEGIN LICENSE BLOCK ----------------------------------
+# This file is part of myFavs, a plugin for Dotclear 2.
 #
-# This file is part of Dotclear 2.
+# Copyright (c) Franck Paul and contributors
+# carnet.franck.paul@gmail.com
 #
-# Copyright (c) 2003-2011 Franck Paul
 # Licensed under the GPL version 2.0 license.
-# See LICENSE file or
+# A copy of this license is available in LICENSE file or at
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-#
-# -- END LICENSE BLOCK -----------------------------------------
+# -- END LICENSE BLOCK ------------------------------------
+
+if (!defined('DC_RC_PATH')) { return; }
 
 // Public and Admin mode
 
 if (!defined('DC_CONTEXT_ADMIN')) { return false; }
 
+// dead but useful code, in order to have translations
+__('myFavs').__('Add favorite capabilities to all plugins');
+
 // Admin mode only
 
-$GLOBALS['core']->addBehavior('adminDashboardFavs','myFavsDashboardFavs');
+/* Register favorite */
+$core->addBehavior('adminDashboardFavorites',array('adminMyFavs','adminDashboardFavorites'));
 
-function myFavsDashboardFavs($core,$favs)
+class adminMyFavs
+{
+	public static function adminDashboardFavorites($core,$favs)
 {
 	// Get all activated plugins
 	$mf_plugins = $core->plugins->getModules();
@@ -34,25 +42,25 @@ function myFavsDashboardFavs($core,$favs)
 					if (file_exists($mf_root.'/_admin.php')) {
 						// Looks for 'adminDashboardFavs' string in PHP code of _admin.php
 						$mf_content = file_get_contents($mf_root.'/_admin.php');
-						if (strpos($mf_content,"'adminDashboardFavs'")) {
+							if (strpos($mf_content,"'adminDashboardFavs'") || (strpos($mf_content,"'adminDashboardFavorites'"))) {
 							$mf_found = true;
 						}
 					}
 					if (!$mf_found) {
+							$icon = file_exists($mf_root.'/icon.png') ? 'index.php?pf='.$mf_id.'/icon.png' : 'index.php?pf=myFavs/icon.png';
+							$icon_big = file_exists($mf_root.'/icon-big.png') ? 'index.php?pf='.$mf_id.'/icon-big.png' : 'index.php?pf=myFavs/icon-big.png';
 						// Add a fav for this plugin
-						$favs[$mf_id] = new ArrayObject(array(
-							$mf_id,
-							$core->plugins->moduleInfo($mf_id,'name'),
-							'plugin.php?p='.$mf_id,
-							'index.php?pf=myFavs/icon.png',
-							'index.php?pf=myFavs/icon-big.png',
-							$core->plugins->moduleInfo($mf_id,'permissions'),
-							null,
-							null));
+							$favs->register($mf_id, array(
+								'title' => __($core->plugins->moduleInfo($mf_id,'name')),
+								'url' => 'plugin.php?p='.$mf_id,
+								'small-icon' => $icon,
+								'large-icon' => $icon_big,
+								'permissions' => $core->plugins->moduleInfo($mf_id,'permissions')
+							));
+						}
 					}
 				}
 			}
 		}
 	}
 }
-?>
