@@ -12,7 +12,7 @@
 
 // Public and Admin mode
 
-if (!defined('DC_CONTEXT_ADMIN')) { return; }
+if (!defined('DC_CONTEXT_ADMIN')) { return false; }
 
 // Admin mode only
 
