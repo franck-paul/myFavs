@@ -47,8 +47,12 @@ class adminMyFavs
 						}
 					}
 					if (!$mf_found) {
-							$icon = file_exists($mf_root.'/icon.png') ? 'index.php?pf='.$mf_id.'/icon.png' : 'index.php?pf=myFavs/icon.png';
-							$icon_big = file_exists($mf_root.'/icon-big.png') ? 'index.php?pf='.$mf_id.'/icon-big.png' : 'index.php?pf=myFavs/icon-big.png';
+							$icon = file_exists($mf_root.'/icon.png') ?
+								urldecode(dcPage::getPF($mf_id.'/icon.png')) :
+								urldecode(dcPage::getPF('myFavs/icon.png'));
+							$icon_big = file_exists($mf_root.'/icon-big.png') ?
+								urldecode(dcPage::getPF($mf_id.'/icon-big.png')) :
+								urldecode(dcPage::getPF('myFavs/icon-big.png'));
 						// Add a fav for this plugin
 							$favs->register($mf_id, array(
 								'title' => __($core->plugins->moduleInfo($mf_id,'name')),
