@@ -23,7 +23,7 @@ __('myFavs') . __('Add favorite capabilities to all plugins');
 // Admin mode only
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', array('adminMyFavs', 'adminDashboardFavorites'));
+$core->addBehavior('adminDashboardFavorites', ['adminMyFavs', 'adminDashboardFavorites']);
 
 class adminMyFavs
 {
@@ -55,13 +55,13 @@ class adminMyFavs
                             urldecode(dcPage::getPF($mf_id . '/icon-big.png')) :
                             urldecode(dcPage::getPF('myFavs/icon-big.png'));
                             // Add a fav for this plugin
-                            $favs->register($mf_id, array(
+                            $favs->register($mf_id, [
                                 'title'       => __($core->plugins->moduleInfo($mf_id, 'name')),
                                 'url'         => 'plugin.php?p=' . $mf_id,
                                 'small-icon'  => $icon,
                                 'large-icon'  => $icon_big,
                                 'permissions' => $core->plugins->moduleInfo($mf_id, 'permissions')
-                            ));
+                            ]);
                         }
                     }
                 }
