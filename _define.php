@@ -10,17 +10,22 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_RC_PATH')) {return;}
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
 $this->registerModule(
-    "myFavs",                                   // Name
-    "Add favorite capabilities to all plugins", // Description
-    "Franck Paul",                              // Author
+    'myFavs',                                   // Name
+    'Add favorite capabilities to all plugins', // Description
+    'Franck Paul',                              // Author
     '0.4',                                      // Version
     [
-        'requires'    => [['core', '2.13']], // Dependencies
+        'requires' => [['core', '2.13']], // Dependencies
         'type'     => 'plugin',  // Type
-        'priority' => 999999999 // Priority
+        'priority' => 999999999, // Priority
+
+        'details'    => 'https://open-time.net/?q=myFavs',       // Details URL
+        'support'    => 'https://github.com/franck-paul/myFavs', // Support URL
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/main/dcstore.xml'
     ]
 );
