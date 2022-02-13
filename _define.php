@@ -20,12 +20,12 @@ $this->registerModule(
     'Franck Paul',                              // Author
     '0.4',                                      // Version
     [
-        'requires' => [['core', '2.13']], // Dependencies
+        'requires' => [['core', '2.21']], // Dependencies
         'type'     => 'plugin',  // Type
         'priority' => 999999999, // Priority
 
         'details'    => 'https://open-time.net/?q=myFavs',       // Details URL
         'support'    => 'https://github.com/franck-paul/myFavs', // Support URL
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/master/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/master/dcstore.xml',
     ]
 );
