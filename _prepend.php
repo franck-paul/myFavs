@@ -26,19 +26,19 @@ __('myFavs') . __('Add favorite capabilities to all plugins');
 // Admin mode only
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', ['adminMyFavs', 'adminDashboardFavorites']);
+dcCore::app()->addBehavior('adminDashboardFavorites', ['adminMyFavs', 'adminDashboardFavorites']);
 
 class adminMyFavs
 {
-    public static function adminDashboardFavorites($core, $favs)
+    public static function adminDashboardFavorites($core = null, $favs)
     {
         // Get all activated plugins
-        $mf_plugins = $core->plugins->getModules();
+        $mf_plugins = dcCore::app()->plugins->getModules();
         if (!empty($mf_plugins)) {
             foreach ($mf_plugins as $mf_id => $mf_plugin) {
                 if ($mf_id != 'myFavs') {
                     // Only other plugins
-                    $mf_root = $core->plugins->moduleRoot($mf_id);
+                    $mf_root = dcCore::app()->plugins->moduleRoot($mf_id);
                     // Looks for index.php, mandatory to create a fav on dashboard
                     if (file_exists($mf_root . '/index.php')) {
                         $mf_found = false;
@@ -72,11 +72,11 @@ class adminMyFavs
                             }
                             // Add a fav for this plugin
                             $favs->register($mf_id, [
-                                'title'       => __($core->plugins->moduleInfo($mf_id, 'name')),
+                                'title'       => __(dcCore::app()->plugins->moduleInfo($mf_id, 'name')),
                                 'url'         => 'plugin.php?p=' . $mf_id,
                                 'small-icon'  => $icon,
                                 'large-icon'  => $icon_big,
-                                'permissions' => $core->plugins->moduleInfo($mf_id, 'permissions'),
+                                'permissions' => dcCore::app()->plugins->moduleInfo($mf_id, 'permissions'),
                             ]);
                         }
                     }
