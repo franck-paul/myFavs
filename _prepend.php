@@ -30,7 +30,7 @@ dcCore::app()->addBehavior('adminDashboardFavorites', ['adminMyFavs', 'adminDash
 
 class adminMyFavs
 {
-    public static function adminDashboardFavorites($core = null, $favs)
+    public static function adminDashboardFavorites($core, $favs)
     {
         // Get all activated plugins
         $mf_plugins = dcCore::app()->plugins->getModules();

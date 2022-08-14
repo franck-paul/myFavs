@@ -18,7 +18,7 @@ $this->registerModule(
     'myFavs',                                   // Name
     'Add favorite capabilities to all plugins', // Description
     'Franck Paul',                              // Author
-    '0.5',
+    '0.5.1',
     [
         'requires' => [['core', '2.23']], // Dependencies
         'type'     => 'plugin',  // Type
