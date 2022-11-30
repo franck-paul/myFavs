@@ -25,12 +25,9 @@ __('myFavs') . __('Add favorite capabilities to all plugins');
 
 // Admin mode only
 
-/* Register favorite */
-dcCore::app()->addBehavior('adminDashboardFavorites', ['adminMyFavs', 'adminDashboardFavorites']);
-
 class adminMyFavs
 {
-    public static function adminDashboardFavorites($core, $favs)
+    public static function adminDashboardFavorites($favs)
     {
         // Get all activated plugins
         $mf_plugins = dcCore::app()->plugins->getModules();
@@ -43,9 +40,9 @@ class adminMyFavs
                     if (file_exists($mf_root . '/index.php')) {
                         $mf_found = false;
                         // Looks for _admin.php, mandatory to register fav's behaviours (may be, but should not be, in _prepend.php!)
-                        if (file_exists($mf_root . '/_admin.php')) {
+                        if (file_exists($mf_root . DIRECTORY_SEPARATOR . dcModules::MODULE_FILE_ADMIN)) {
                             // Looks for 'adminDashboardFavs' string in PHP code of _admin.php
-                            $mf_content = file_get_contents($mf_root . '/_admin.php');
+                            $mf_content = file_get_contents($mf_root . DIRECTORY_SEPARATOR . dcModules::MODULE_FILE_ADMIN);
                             if (strpos($mf_content, "'adminDashboardFavs'") || (strpos($mf_content, "'adminDashboardFavorites'"))) {
                                 $mf_found = true;
                             }
@@ -85,3 +82,6 @@ class adminMyFavs
         }
     }
 }
+
+/* Register favorite */
+dcCore::app()->addBehavior('adminDashboardFavoritesV2', [adminMyFavs::class, 'adminDashboardFavorites']);
