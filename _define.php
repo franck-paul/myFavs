@@ -16,9 +16,9 @@ $this->registerModule(
     'Franck Paul',                              // Author
     '2.0',
     [
-        'requires'   => [['core', '2.25']],
-        'type'       => 'plugin',
-        'priority'   => 999_999_999,
+        'requires' => [['core', '2.26']],
+        'type'     => 'plugin',
+        'priority' => 999_999_999,
 
         'details'    => 'https://open-time.net/?q=myFavs',
         'support'    => 'https://github.com/franck-paul/myFavs',

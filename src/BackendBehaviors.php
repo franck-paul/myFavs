@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\myFavs;
 
 use Autoloader;
 use dcCore;
+use dcModuleDefine;
 use dcModules;
 use dcPage;
 
@@ -24,12 +25,12 @@ class BackendBehaviors
     public static function adminDashboardFavorites($favs)
     {
         // Get all activated plugins
-        $mf_plugins = dcCore::app()->plugins->getModules();
+        $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
                 if ($module_id != 'myFavs') {
                     // Only other plugins
-                    $module_root  = dcCore::app()->plugins->moduleRoot($module_id);
+                    $module_root  = dcCore::app()->plugins->moduleInfo($module_id, 'root');
                     $module_admin = '';
                     $content      = '';
 
