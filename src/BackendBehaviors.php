@@ -16,13 +16,14 @@ namespace Dotclear\Plugin\myFavs;
 
 use Autoloader;
 use dcCore;
+use dcFavorites;
 use dcModuleDefine;
 use dcModules;
 use dcPage;
 
 class BackendBehaviors
 {
-    public static function adminDashboardFavorites($favs)
+    public static function adminDashboardFavorites(dcFavorites $favs)
     {
         // Get all activated plugins
         $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
@@ -63,10 +64,8 @@ class BackendBehaviors
                                 $icon = $icon_big = [$icon_light, $icon_dark];
                             } else {
                                 // Use PNG version(s) if exist else use fallback
-                                $fallback = [
-                                    urldecode(dcPage::getPF('myFavs/icon.svg')),
-                                    urldecode(dcPage::getPF('myFavs/icon-dark.svg')), ];
-                                $icon = file_exists($module_root . '/icon.png') ?
+                                $fallback = My::icons();
+                                $icon     = file_exists($module_root . '/icon.png') ?
                                     urldecode(dcPage::getPF($module_id . '/icon.png')) :
                                     $fallback;
                                 $icon_big = file_exists($module_root . '/icon-big.png') ?

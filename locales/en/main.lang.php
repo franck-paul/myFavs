@@ -11,5 +11,5 @@
 
 use Dotclear\Helper\L10n;
 
-L10n::$locales['Add favorite capabilities to all plugins'] = 'Ajoute la possibilité de mise en favori à toutes les plugins';
-L10n::$locales['myFavs'] = 'Mes favoris';
+L10n::$locales['Add favorite capabilities to all plugins'] = '';
+L10n::$locales['myFavs'] = '';
