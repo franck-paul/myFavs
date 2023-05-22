@@ -11,9 +11,9 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 $this->registerModule(
-    'myFavs',                                   // Name
-    'Add favorite capabilities to all plugins', // Description
-    'Franck Paul',                              // Author
+    'myFavs',
+    'Add favorite capabilities to all plugins',
+    'Franck Paul',
     '3.0',
     [
         'requires' => [['core', '2.26']],
