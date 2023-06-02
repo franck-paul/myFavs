@@ -75,7 +75,7 @@ class BackendBehaviors
                             // Add a fav for this plugin
                             $favs->register($module_id, [
                                 'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
-                                'url'         => 'plugin.php?p=' . $module_id,
+                                'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
                                 'small-icon'  => $icon,
                                 'large-icon'  => $icon_big,
                                 'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
