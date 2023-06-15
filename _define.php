@@ -14,7 +14,7 @@ $this->registerModule(
     'myFavs',
     'Add favorite capabilities to all plugins',
     'Franck Paul',
-    '3.1',
+    '3.2',
     [
         'requires' => [['core', '2.26']],
         'type'     => 'plugin',
