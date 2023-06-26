@@ -20,6 +20,7 @@ use dcFavorites;
 use dcModuleDefine;
 use dcModules;
 use dcPage;
+use Exception;
 
 class BackendBehaviors
 {
@@ -72,14 +73,19 @@ class BackendBehaviors
                                     urldecode(dcPage::getPF($module_id . '/icon-big.png')) :
                                     $fallback;
                             }
+
                             // Add a fav for this plugin
-                            $favs->register($module_id, [
-                                'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
-                                'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
-                                'small-icon'  => $icon,
-                                'large-icon'  => $icon_big,
-                                'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
-                            ]);
+                            try {
+                                $favs->register($module_id, [
+                                    'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
+                                    'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
+                                    'small-icon'  => $icon,
+                                    'large-icon'  => $icon_big,
+                                    'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
+                                ]);
+                            } catch (Exception $e) {
+                                ; // Ignore exception
+                            }
                         }
                     }
                 }
