@@ -33,6 +33,7 @@ class BackendBehaviors
                 if ($module_id != 'myFavs') {
                     // Ignore non active plugins (due to lack of dependencies)
                     $define = dcCore::app()->plugins->getDefine($module_id);
+                    // Note this test below will not more be necessary with 2.27
                     if (!empty($define->getMissing())) {
                         continue;
                     }
