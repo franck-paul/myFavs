@@ -16,15 +16,15 @@ namespace Dotclear\Plugin\myFavs;
 
 use Autoloader;
 use dcCore;
-use dcFavorites;
 use dcModuleDefine;
 use dcModules;
-use dcPage;
+use Dotclear\Core\Backend\Favorites;
+use Dotclear\Core\Backend\Page;
 use Exception;
 
 class BackendBehaviors
 {
-    public static function adminDashboardFavorites(dcFavorites $favs)
+    public static function adminDashboardFavorites(Favorites $favs)
     {
         // Get all activated plugins
         $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
@@ -65,19 +65,19 @@ class BackendBehaviors
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
                                 // Use SVG version(s) if exist
-                                $icon_light = $icon_dark = urldecode(dcPage::getPF($module_id . '/icon.svg'));
+                                $icon_light = $icon_dark = urldecode(Page::getPF($module_id . '/icon.svg'));
                                 if (file_exists($module_root . '/icon-dark.svg')) {
-                                    $icon_dark = urldecode(dcPage::getPF($module_id . '/icon-dark.svg'));
+                                    $icon_dark = urldecode(Page::getPF($module_id . '/icon-dark.svg'));
                                 }
                                 $icon = $icon_big = [$icon_light, $icon_dark];
                             } else {
                                 // Use PNG version(s) if exist else use fallback
                                 $fallback = My::icons();
                                 $icon     = file_exists($module_root . '/icon.png') ?
-                                    urldecode(dcPage::getPF($module_id . '/icon.png')) :
+                                    urldecode(Page::getPF($module_id . '/icon.png')) :
                                     $fallback;
                                 $icon_big = file_exists($module_root . '/icon-big.png') ?
-                                    urldecode(dcPage::getPF($module_id . '/icon-big.png')) :
+                                    urldecode(Page::getPF($module_id . '/icon-big.png')) :
                                     $fallback;
                             }
 
@@ -85,7 +85,7 @@ class BackendBehaviors
                             try {
                                 $favs->register($module_id, [
                                     'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
-                                    'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
+                                    'url'         => dcCore::app()->admin->url->get('admin.plugin.' . $module_id),
                                     'small-icon'  => $icon,
                                     'large-icon'  => $icon_big,
                                     'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
