@@ -31,14 +31,6 @@ class BackendBehaviors
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
                 if ($module_id != 'myFavs') {
-                    // Ignore non active plugins (due to lack of dependencies)
-                    $define = dcCore::app()->plugins->getDefine($module_id);
-                    // Note this test below will not more be necessary with 2.27
-                    if (!empty($define->getMissing())) {
-                        continue;
-                    }
-
-                    // Only other plugins
                     $module_root  = dcCore::app()->plugins->moduleInfo($module_id, 'root');
                     $module_admin = '';
                     $content      = '';
