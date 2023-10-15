@@ -24,7 +24,7 @@ use Exception;
 
 class BackendBehaviors
 {
-    public static function adminDashboardFavorites(Favorites $favs)
+    public static function adminDashboardFavorites(Favorites $favs): string
     {
         // Get all activated plugins
         $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
@@ -77,7 +77,7 @@ class BackendBehaviors
                             try {
                                 $favs->register($module_id, [
                                     'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
-                                    'url'         => dcCore::app()->admin->url->get('admin.plugin.' . $module_id),
+                                    'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
                                     'small-icon'  => $icon,
                                     'large-icon'  => $icon_big,
                                     'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
@@ -90,5 +90,7 @@ class BackendBehaviors
                 }
             }
         }
+
+        return '';
     }
 }
