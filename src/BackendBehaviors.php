@@ -30,6 +30,7 @@ class BackendBehaviors
         $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
+                $module_id = (string) $module_id;
                 if ($module_id != 'myFavs') {
                     $module_root  = dcCore::app()->plugins->moduleInfo($module_id, 'root');
                     $module_admin = '';
@@ -52,7 +53,7 @@ class BackendBehaviors
                     }
                     if ($module_admin !== '') {
                         // Check for fav registration before proposing an alternate one
-                        $content = file_get_contents($module_root . DIRECTORY_SEPARATOR . $module_admin);
+                        $content = (string) file_get_contents($module_root . DIRECTORY_SEPARATOR . $module_admin);
                         if (!strpos($content, "'adminDashboardFavs'") && !strpos($content, "'adminDashboardFavorites'")) {
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
