@@ -15,11 +15,11 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\myFavs;
 
 use Autoloader;
-use dcCore;
-use dcModuleDefine;
-use dcModules;
+use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
 use Dotclear\Core\Backend\Page;
+use Dotclear\Interface\Module\ModulesInterface;
+use Dotclear\Module\ModuleDefine;
 use Exception;
 
 class BackendBehaviors
@@ -27,12 +27,12 @@ class BackendBehaviors
     public static function adminDashboardFavorites(Favorites $favs): string
     {
         // Get all activated plugins
-        $mf_plugins = dcCore::app()->plugins->getDefines(['state' => dcModuleDefine::STATE_ENABLED], true);
+        $mf_plugins = App::plugins()->getDefines(['state' => ModuleDefine::STATE_ENABLED], true);
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
                 $module_id = (string) $module_id;
                 if ($module_id != 'myFavs') {
-                    $module_root  = dcCore::app()->plugins->moduleInfo($module_id, 'root');
+                    $module_root  = App::plugins()->moduleInfo($module_id, 'root');
                     $module_admin = '';
                     $content      = '';
 
@@ -40,15 +40,15 @@ class BackendBehaviors
                     // Looks for index.php, mandatory to create a fav on dashboard
                     if (file_exists($module_root . '/index.php')) {
                         // Looks for _admin.php, mandatory to register fav's behaviours (may be, but should not be, in _prepend.php!)
-                        if (file_exists($module_root . DIRECTORY_SEPARATOR . dcModules::MODULE_FILE_ADMIN)) {
-                            $module_admin = dcModules::MODULE_FILE_ADMIN;
+                        if (file_exists($module_root . DIRECTORY_SEPARATOR . ModulesInterface::MODULE_FILE_ADMIN)) {
+                            $module_admin = ModulesInterface::MODULE_FILE_ADMIN;
                         }
                     } else {
                         // New school plugins
                         // Looks for Admin.php, mandatory to register fav's behaviours (may be, but should not be, in Prepend.php!)
-                        $module_ns = dcCore::app()->plugins->moduleInfo($module_id, 'namespace');
-                        if (!empty($module_ns) && class_exists($module_ns . Autoloader::NS_SEP . dcModules::MODULE_CLASS_ADMIN)) {
-                            $module_admin = dcModules::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . dcModules::MODULE_CLASS_ADMIN . '.php';
+                        $module_ns = App::plugins()->moduleInfo($module_id, 'namespace');
+                        if (!empty($module_ns) && class_exists($module_ns . Autoloader::NS_SEP . ModulesInterface::MODULE_CLASS_ADMIN)) {
+                            $module_admin = ModulesInterface::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . ModulesInterface::MODULE_CLASS_ADMIN . '.php';
                         }
                     }
                     if ($module_admin !== '') {
@@ -77,13 +77,13 @@ class BackendBehaviors
                             // Add a fav for this plugin
                             try {
                                 $favs->register($module_id, [
-                                    'title'       => __(dcCore::app()->plugins->moduleInfo($module_id, 'name')),
-                                    'url'         => dcCore::app()->adminurl->get('admin.plugin.' . $module_id),
+                                    'title'       => __(App::plugins()->moduleInfo($module_id, 'name')),
+                                    'url'         => App::backend()->url()->get('admin.plugin.' . $module_id),
                                     'small-icon'  => $icon,
                                     'large-icon'  => $icon_big,
-                                    'permissions' => dcCore::app()->plugins->moduleInfo($module_id, 'permissions'),
+                                    'permissions' => App::plugins()->moduleInfo($module_id, 'permissions'),
                                 ]);
-                            } catch (Exception $e) {
+                            } catch (Exception) {
                                 ; // Ignore exception
                             }
                         }

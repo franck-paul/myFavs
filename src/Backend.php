@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\myFavs;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 
 class Backend extends Process
@@ -34,7 +34,7 @@ class Backend extends Process
         }
 
         /* Register favorite */
-        dcCore::app()->addBehavior('adminDashboardFavoritesV2', BackendBehaviors::adminDashboardFavorites(...));
+        App::behavior()->addBehavior('adminDashboardFavoritesV2', BackendBehaviors::adminDashboardFavorites(...));
 
         return true;
     }
