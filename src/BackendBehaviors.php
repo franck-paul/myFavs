@@ -18,7 +18,6 @@ use Autoloader;
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
 use Dotclear\Core\Backend\Page;
-use Dotclear\Interface\Module\ModulesInterface;
 use Dotclear\Module\ModuleDefine;
 use Exception;
 
@@ -40,15 +39,15 @@ class BackendBehaviors
                     // Looks for index.php, mandatory to create a fav on dashboard
                     if (file_exists($module_root . '/index.php')) {
                         // Looks for _admin.php, mandatory to register fav's behaviours (may be, but should not be, in _prepend.php!)
-                        if (file_exists($module_root . DIRECTORY_SEPARATOR . ModulesInterface::MODULE_FILE_ADMIN)) {
-                            $module_admin = ModulesInterface::MODULE_FILE_ADMIN;
+                        if (file_exists($module_root . DIRECTORY_SEPARATOR . App::plugins()::MODULE_FILE_ADMIN)) {
+                            $module_admin = App::plugins()::MODULE_FILE_ADMIN;
                         }
                     } else {
                         // New school plugins
                         // Looks for Admin.php, mandatory to register fav's behaviours (may be, but should not be, in Prepend.php!)
                         $module_ns = App::plugins()->moduleInfo($module_id, 'namespace');
-                        if (!empty($module_ns) && class_exists($module_ns . Autoloader::NS_SEP . ModulesInterface::MODULE_CLASS_ADMIN)) {
-                            $module_admin = ModulesInterface::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . ModulesInterface::MODULE_CLASS_ADMIN . '.php';
+                        if (!empty($module_ns) && class_exists($module_ns . Autoloader::NS_SEP . App::plugins()::MODULE_CLASS_ADMIN)) {
+                            $module_admin = App::plugins()::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . App::plugins()::MODULE_CLASS_ADMIN . '.php';
                         }
                     }
                     if ($module_admin !== '') {
