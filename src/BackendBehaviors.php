@@ -50,6 +50,7 @@ class BackendBehaviors
                             $module_admin = App::plugins()::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . App::plugins()::MODULE_CLASS_ADMIN . '.php';
                         }
                     }
+
                     if ($module_admin !== '') {
                         // Check for fav registration before proposing an alternate one
                         $content = (string) file_get_contents($module_root . DIRECTORY_SEPARATOR . $module_admin);
@@ -57,11 +58,14 @@ class BackendBehaviors
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
                                 // Use SVG version(s) if exist
-                                $icon_light = $icon_dark = urldecode(Page::getPF($module_id . '/icon.svg'));
+                                $icon_light = urldecode(Page::getPF($module_id . '/icon.svg'));
+                                $icon_dark = $icon_light;
                                 if (file_exists($module_root . '/icon-dark.svg')) {
                                     $icon_dark = urldecode(Page::getPF($module_id . '/icon-dark.svg'));
                                 }
-                                $icon = $icon_big = [$icon_light, $icon_dark];
+
+                                $icon = [$icon_light, $icon_dark];
+                                $icon_big = [$icon_light, $icon_dark];
                             } else {
                                 // Use PNG version(s) if exist else use fallback
                                 $fallback = My::icons();
