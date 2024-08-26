@@ -22,6 +22,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/?q=myFavs',
         'support'    => 'https://github.com/franck-paul/myFavs',
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/master/dcstore.xml',
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/main/dcstore.xml',
     ]
 );
