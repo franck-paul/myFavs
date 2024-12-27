@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief myFavs, a plugin for Dotclear 2
  *
@@ -30,7 +31,7 @@ class BackendBehaviors
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
                 $module_id = (string) $module_id;
-                if ($module_id != 'myFavs') {
+                if ($module_id !== My::id()) {
                     $module_root  = App::plugins()->moduleInfo($module_id, 'root');
                     $module_admin = '';
                     $content      = '';
@@ -59,12 +60,12 @@ class BackendBehaviors
                             if (file_exists($module_root . '/icon.svg')) {
                                 // Use SVG version(s) if exist
                                 $icon_light = urldecode(Page::getPF($module_id . '/icon.svg'));
-                                $icon_dark = $icon_light;
+                                $icon_dark  = $icon_light;
                                 if (file_exists($module_root . '/icon-dark.svg')) {
                                     $icon_dark = urldecode(Page::getPF($module_id . '/icon-dark.svg'));
                                 }
 
-                                $icon = [$icon_light, $icon_dark];
+                                $icon     = [$icon_light, $icon_dark];
                                 $icon_big = [$icon_light, $icon_dark];
                             } else {
                                 // Use PNG version(s) if exist else use fallback

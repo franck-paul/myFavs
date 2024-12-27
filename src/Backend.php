@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief myFavs, a plugin for Dotclear 2
  *
@@ -22,7 +23,8 @@ class Backend extends Process
     public static function init(): bool
     {
         // dead but useful code, in order to have translations
-        __('myFavs') . __('Add favorite capabilities to all plugins');
+        __('myFavs');
+        __('Add favorite capabilities to all plugins');
 
         return self::status(My::checkContext(My::BACKEND));
     }
