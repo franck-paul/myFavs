@@ -18,12 +18,13 @@ $this->registerModule(
     '5.2.1',
     [
         'date'     => '2003-08-13T13:42:00+0100',
-        'requires' => [['core', '2.28']],
+        'requires' => [['core', '2.36']],
         'type'     => 'plugin',
         'priority' => 999_999_999,
 
         'details'    => 'https://open-time.net/?q=myFavs',
         'support'    => 'https://github.com/franck-paul/myFavs',
         'repository' => 'https://raw.githubusercontent.com/franck-paul/myFavs/main/dcstore.xml',
+        'license'    => 'gpl2',
     ]
 );
