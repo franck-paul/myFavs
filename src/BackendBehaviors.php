@@ -18,7 +18,6 @@ namespace Dotclear\Plugin\myFavs;
 use Autoloader;
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
-use Dotclear\Core\Backend\Page;
 use Dotclear\Module\ModuleDefine;
 use Exception;
 
@@ -59,10 +58,10 @@ class BackendBehaviors
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
                                 // Use SVG version(s) if exist
-                                $icon_light = urldecode(Page::getPF($module_id . '/icon.svg'));
+                                $icon_light = urldecode((string) App::backend()->page()->getPF($module_id . '/icon.svg'));
                                 $icon_dark  = $icon_light;
                                 if (file_exists($module_root . '/icon-dark.svg')) {
-                                    $icon_dark = urldecode(Page::getPF($module_id . '/icon-dark.svg'));
+                                    $icon_dark = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-dark.svg'));
                                 }
 
                                 $icon     = [$icon_light, $icon_dark];
@@ -71,10 +70,10 @@ class BackendBehaviors
                                 // Use PNG version(s) if exist else use fallback
                                 $fallback = My::icons();
                                 $icon     = file_exists($module_root . '/icon.png') ?
-                                    urldecode(Page::getPF($module_id . '/icon.png')) :
+                                    urldecode((string) App::backend()->page()->getPF($module_id . '/icon.png')) :
                                     $fallback;
                                 $icon_big = file_exists($module_root . '/icon-big.png') ?
-                                    urldecode(Page::getPF($module_id . '/icon-big.png')) :
+                                    urldecode((string) App::backend()->page()->getPF($module_id . '/icon-big.png')) :
                                     $fallback;
                             }
 
