@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="myFavs">
     <name>myFavs</name>
-    <version>6.0</version>
+    <version>6.1</version>
     <author>Franck Paul</author>
     <desc>Add favorite capabilities to all plugins</desc>
-    <date>2025-09-07T15:54:39+0200</date>
-    <file>https://github.com/franck-paul/myFavs/releases/download/6.0/plugin-myFavs-6.0.zip</file>
+    <date>2025-09-22T10:29:17+0200</date>
+    <file>https://github.com/franck-paul/myFavs/releases/download/6.1/plugin-myFavs-6.1.zip</file>
     <da:dcmin>2.36</da:dcmin>
     <da:details>https://open-time.net/?q=myFavs</da:details>
     <da:support>https://github.com/franck-paul/myFavs</da:support>
