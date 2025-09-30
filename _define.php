@@ -15,9 +15,9 @@ $this->registerModule(
     'myFavs',
     'Add favorite capabilities to all plugins',
     'Franck Paul',
-    '6.1',
+    '6.2',
     [
-        'date'     => '2025-09-22T10:29:17+0200',
+        'date'     => '2025-09-30T08:19:34+0200',
         'requires' => [['core', '2.36']],
         'type'     => 'plugin',
         'priority' => 999_999_999,
