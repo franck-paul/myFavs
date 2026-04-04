@@ -31,7 +31,11 @@ class BackendBehaviors
             foreach (array_keys($mf_plugins) as $module_id) {
                 $module_id = (string) $module_id;
                 if ($module_id !== My::id()) {
-                    $module_root  = App::plugins()->moduleInfo($module_id, 'root');
+                    $module_root = is_string($module_root = App::plugins()->moduleInfo($module_id, 'root')) ? $module_root : '';
+                    if ($module_root === '') {
+                        continue;
+                    }
+
                     $module_admin = '';
                     $content      = '';
 
@@ -45,8 +49,8 @@ class BackendBehaviors
                     } else {
                         // New school plugins
                         // Looks for Admin.php, mandatory to register fav's behaviours (may be, but should not be, in Prepend.php!)
-                        $module_ns = App::plugins()->moduleInfo($module_id, 'namespace');
-                        if (!empty($module_ns) && class_exists($module_ns . Autoloader::NS_SEP . App::plugins()::MODULE_CLASS_ADMIN)) {
+                        $module_ns = is_string($module_ns = App::plugins()->moduleInfo($module_id, 'namespace')) ? $module_ns : '';
+                        if ($module_ns !== '' && class_exists($module_ns . Autoloader::NS_SEP . App::plugins()::MODULE_CLASS_ADMIN)) {
                             $module_admin = App::plugins()::MODULE_CLASS_DIR . DIRECTORY_SEPARATOR . App::plugins()::MODULE_CLASS_ADMIN . '.php';
                         }
                     }
@@ -84,8 +88,9 @@ class BackendBehaviors
 
                             // Add a fav for this plugin
                             try {
+                                $name = is_string($name = App::plugins()->moduleInfo($module_id, 'name')) ? $name : $module_id;
                                 $favs->register($module_id, [
-                                    'title'       => __(App::plugins()->moduleInfo($module_id, 'name')),
+                                    'title'       => __($name),
                                     'url'         => App::backend()->url()->get('admin.plugin.' . $module_id),
                                     'small-icon'  => $icon,
                                     'large-icon'  => $icon_big,
