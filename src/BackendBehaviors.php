@@ -88,13 +88,15 @@ class BackendBehaviors
 
                             // Add a fav for this plugin
                             try {
-                                $name = is_string($name = App::plugins()->moduleInfo($module_id, 'name')) ? $name : $module_id;
+                                $name  = is_string($name = App::plugins()->moduleInfo($module_id, 'name')) ? $name : $module_id;
+                                $perms = is_string($perms = App::plugins()->moduleInfo($module_id, 'permissions')) ? $perms : null;
+
                                 $favs->register($module_id, [
                                     'title'       => __($name),
                                     'url'         => App::backend()->url()->get('admin.plugin.' . $module_id),
                                     'small-icon'  => $icon,
                                     'large-icon'  => $icon_big,
-                                    'permissions' => App::plugins()->moduleInfo($module_id, 'permissions'),
+                                    'permissions' => $perms,
                                 ]);
                             } catch (Exception) {
                                 ; // Ignore exception
