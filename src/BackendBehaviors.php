@@ -18,6 +18,7 @@ namespace Dotclear\Plugin\myFavs;
 use Autoloader;
 use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
+use Dotclear\Core\Backend\Icon;
 use Dotclear\Module\ModuleDefine;
 use Exception;
 
@@ -73,17 +74,27 @@ class BackendBehaviors
                                     $icon_dark = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-dark.svg'));
                                 }
 
-                                $icon     = [$icon_light, $icon_dark];
-                                $icon_big = [$icon_light, $icon_dark];
+                                // Big icon is the same as small one
+                                $icon_light_big = $icon_light;
+                                $icon_dark_big  = $icon_dark;
                             } else {
                                 // Use PNG version(s) if exist else use fallback
-                                $fallback = My::icons();
-                                $icon     = file_exists($module_root . '/icon.png') ?
+                                $fallback   = My::icons();
+                                $icon_light = file_exists($module_root . '/icon.png') ?
                                     urldecode((string) App::backend()->page()->getPF($module_id . '/icon.png')) :
-                                    $fallback;
-                                $icon_big = file_exists($module_root . '/icon-big.png') ?
+                                    $fallback[0];
+                                $icon_dark = $icon_light;
+                                if (file_exists($module_root . '/icon-dark.png')) {
+                                    $icon_dark = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-dark.png'));
+                                }
+
+                                $icon_light_big = file_exists($module_root . '/icon-big.png') ?
                                     urldecode((string) App::backend()->page()->getPF($module_id . '/icon-big.png')) :
-                                    $fallback;
+                                    $fallback[0];
+                                $icon_dark_big = $icon_light_big;
+                                if (file_exists($module_root . '/icon-big-dark.png')) {
+                                    $icon_dark_big = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-big-dark.png'));
+                                }
                             }
 
                             // Add a fav for this plugin
@@ -92,11 +103,11 @@ class BackendBehaviors
                                 $perms = is_string($perms = App::plugins()->moduleInfo($module_id, 'permissions')) ? $perms : null;
 
                                 $favs->register($module_id, [
-                                    'title'       => __($name),
-                                    'url'         => App::backend()->url()->get('admin.plugin.' . $module_id),
-                                    'small-icon'  => $icon,
-                                    'large-icon'  => $icon_big,
-                                    'permissions' => $perms,
+                                    'title'          => __($name),
+                                    'url'            => App::backend()->url()->get('admin.plugin.' . $module_id),
+                                    'menu-icon'      => new Icon($icon_light, $icon_dark),
+                                    'dashboard-icon' => new Icon($icon_light_big, $icon_dark_big),
+                                    'permissions'    => $perms,
                                 ]);
                             } catch (Exception) {
                                 ; // Ignore exception
