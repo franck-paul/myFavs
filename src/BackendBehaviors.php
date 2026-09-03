@@ -24,7 +24,7 @@ use Exception;
 
 class BackendBehaviors
 {
-    public static function adminDashboardFavorites(Favorites $favs): string
+    public static function adminDashboardFavorites(Favorites $favorites): string
     {
         // Get all activated plugins
         $mf_plugins = App::plugins()->getDefines(['state' => ModuleDefine::STATE_ENABLED], true);
@@ -102,7 +102,7 @@ class BackendBehaviors
                                 $name  = is_string($name = App::plugins()->moduleInfo($module_id, 'name')) ? $name : $module_id;
                                 $perms = is_string($perms = App::plugins()->moduleInfo($module_id, 'permissions')) ? $perms : null;
 
-                                $favs->register($module_id, [
+                                $favorites->register($module_id, [
                                     'title'          => __($name),
                                     'url'            => App::backend()->url()->get('admin.plugin.' . $module_id),
                                     'menu-icon'      => new Icon($icon_light, $icon_dark),
