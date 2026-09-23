@@ -38,7 +38,6 @@ class BackendBehaviors
                     }
 
                     $module_admin = '';
-                    $content      = '';
 
                     // Old school plugins
                     // Looks for index.php, mandatory to create a fav on dashboard
