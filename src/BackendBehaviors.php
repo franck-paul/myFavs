@@ -30,7 +30,6 @@ class BackendBehaviors
         $mf_plugins = App::plugins()->getDefines(['state' => ModuleDefine::STATE_ENABLED], true);
         if (!empty($mf_plugins)) {
             foreach (array_keys($mf_plugins) as $module_id) {
-                $module_id = (string) $module_id;
                 if ($module_id !== My::id()) {
                     $module_root = is_string($module_root = App::plugins()->moduleInfo($module_id, 'root')) ? $module_root : '';
                     if ($module_root === '') {
@@ -67,10 +66,10 @@ class BackendBehaviors
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
                                 // Use SVG version(s) if exist
-                                $icon_light = urldecode((string) App::backend()->page()->getPF($module_id . '/icon.svg'));
+                                $icon_light = urldecode(App::backend()->page()->getPF($module_id . '/icon.svg'));
                                 $icon_dark  = $icon_light;
                                 if (file_exists($module_root . '/icon-dark.svg')) {
-                                    $icon_dark = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-dark.svg'));
+                                    $icon_dark = urldecode(App::backend()->page()->getPF($module_id . '/icon-dark.svg'));
                                 }
 
                                 // Big icon is the same as small one
@@ -80,19 +79,19 @@ class BackendBehaviors
                                 // Use PNG version(s) if exist else use fallback
                                 $fallback   = My::icons();
                                 $icon_light = file_exists($module_root . '/icon.png') ?
-                                    urldecode((string) App::backend()->page()->getPF($module_id . '/icon.png')) :
+                                    urldecode(App::backend()->page()->getPF($module_id . '/icon.png')) :
                                     $fallback[0];
                                 $icon_dark = $icon_light;
                                 if (file_exists($module_root . '/icon-dark.png')) {
-                                    $icon_dark = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-dark.png'));
+                                    $icon_dark = urldecode(App::backend()->page()->getPF($module_id . '/icon-dark.png'));
                                 }
 
                                 $icon_light_big = file_exists($module_root . '/icon-big.png') ?
-                                    urldecode((string) App::backend()->page()->getPF($module_id . '/icon-big.png')) :
+                                    urldecode(App::backend()->page()->getPF($module_id . '/icon-big.png')) :
                                     $fallback[0];
                                 $icon_dark_big = $icon_light_big;
                                 if (file_exists($module_root . '/icon-big-dark.png')) {
-                                    $icon_dark_big = urldecode((string) App::backend()->page()->getPF($module_id . '/icon-big-dark.png'));
+                                    $icon_dark_big = urldecode(App::backend()->page()->getPF($module_id . '/icon-big-dark.png'));
                                 }
                             }
 
