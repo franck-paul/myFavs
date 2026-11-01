@@ -58,10 +58,10 @@ class BackendBehaviors
                         // Check for fav registration before proposing an alternate one
                         $content = (string) file_get_contents($module_root . DIRECTORY_SEPARATOR . $module_admin);
                         if (
-                            !strpos($content, "'adminDashboardFavs'")      && // Behavior
-                            !strpos($content, "'adminDashboardFavsV2'")    && // Behavior V2
-                            !strpos($content, "'adminDashboardFavorites'") && // Behavior
-                            !strpos($content, "'adminDashboardFavoritesV2'")  // Behavior V2
+                            !str_contains($content, "'adminDashboardFavs'")      && // Behavior
+                            !str_contains($content, "'adminDashboardFavsV2'")    && // Behavior V2
+                            !str_contains($content, "'adminDashboardFavorites'") && // Behavior
+                            !str_contains($content, "'adminDashboardFavoritesV2'")  // Behavior V2
                         ) {
                             // Looks for SVG or PNG icon(s) to use with favorite
                             if (file_exists($module_root . '/icon.svg')) {
