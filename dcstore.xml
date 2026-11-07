@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="myFavs">
     <name>myFavs</name>
-    <version>7.0</version>
+    <version>7.1</version>
     <author>Franck Paul</author>
     <desc>Add favorite capabilities to all plugins</desc>
-    <date>2026-08-03T10:05:40+0200</date>
-    <file>https://github.com/franck-paul/myFavs/releases/download/7.0/plugin-myFavs-7.0.zip</file>
+    <date>2026-11-07T16:59:26+0100</date>
+    <file>https://github.com/franck-paul/myFavs/releases/download/7.1/plugin-myFavs-7.1.zip</file>
     <da:dcmin>2.39</da:dcmin>
     <da:details>https://dotclear.org/plugin/detail/myFavs</da:details>
     <da:support>https://github.com/franck-paul/myFavs</da:support>
