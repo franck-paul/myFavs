@@ -18,9 +18,9 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'myFavs',
         'Add favorite capabilities to all plugins',
         'Franck Paul',
-        '7.0',
+        '7.1',
         [
-            'date'     => '2026-08-03T10:05:40+0200',
+            'date'     => '2026-11-07T16:59:26+0100',
             'requires' => [['core', '2.39']],
             'type'     => 'plugin',
             'priority' => 999_999_999,
